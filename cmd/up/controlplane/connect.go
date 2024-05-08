@@ -27,5 +27,9 @@ type connectCmd struct {
 
 // Run executes the get command.
 func (c *connectCmd) Run(ctx context.Context) error {
-	return fmt.Errorf("this command has been removed in favor of 'up ctx <space name>/%s/%s'", c.Group, c.Name)
+	err := fmt.Errorf("this command has been removed in favor of 'up ctx <org>/<space name>/%s/%s'", c.Group, c.Name)
+	if c.Group == "" {
+		err = fmt.Errorf("this command has been removed in favor of 'up ctx <org>/<space name>/<group>/%s'", c.Name)
+	}
+	return err
 }
